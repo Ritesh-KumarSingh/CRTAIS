@@ -1,0 +1,264 @@
+[
+    {
+        "rule_id": "VR-RAJ-001",
+        "name": "Internal Courtyard for Hot-Dry Zones",
+        "description": "In hot-dry climates, orient the building mass around a central or semi-enclosed courtyard to create a cool microclimate via shading, radiative cooling, and stack-effect ventilation.",
+        "region": "Western Rajasthan",
+        "climate_zone": "Hot-Dry",
+        "tradition": "Haveli architecture of Shekhawati & Jaipur",
+        "category": "courtyard",
+        "condition": {
+            "min_temperature_c": 38,
+            "humidity_pct_max": 40,
+            "solar_radiation_kwh_m2_day_min": 5.5
+        },
+        "recommendation": {
+            "summary": "Provide an internal courtyard occupying 25–35% of the total plot area.",
+            "detail": "The courtyard depth-to-width ratio should be between 1:1 and 1.5:1 to maximize self-shading while permitting night-sky radiative cooling. Plant a deciduous tree at the centre for summer shade. Include a water feature (shallow basin or fountain) to enhance evaporative cooling.",
+            "parameters": {
+                "courtyard_area_ratio": [
+                    0.25,
+                    0.35
+                ],
+                "depth_to_width_ratio": [
+                    1.0,
+                    1.5
+                ]
+            }
+        },
+        "confidence": 0.92,
+        "sources": [
+            {
+                "type": "academic_paper",
+                "reference": "Sharma, S. & Tiwari, G.N. (2019). Thermal performance of courtyards in composite climate of India. Building and Environment, 154, 122–135.",
+                "year": 2019
+            },
+            {
+                "type": "field_survey",
+                "reference": "CRTAIS field documentation, Jaipur walled city, 2025",
+                "year": 2025
+            }
+        ],
+        "tags": [
+            "passive-cooling",
+            "courtyard",
+            "hot-dry",
+            "rajasthan"
+        ]
+    },
+    {
+        "rule_id": "VR-RAJ-002",
+        "name": "Thick Masonry Walls for Thermal Mass",
+        "description": "Use thick masonry walls (350–600 mm) made of local stone or sun-dried brick to exploit diurnal temperature swings in hot-dry regions. The thermal mass absorbs heat during the day and releases it at night.",
+        "region": "Western Rajasthan",
+        "climate_zone": "Hot-Dry",
+        "tradition": "Haveli architecture of Rajasthan",
+        "category": "wall",
+        "condition": {
+            "min_temperature_c": 35,
+            "humidity_pct_max": 45
+        },
+        "recommendation": {
+            "summary": "Build external walls at least 350 mm thick using local sandstone or sun-dried brick.",
+            "detail": "Aim for a thermal time lag of 8–10 hours to shift peak internal temperatures to nighttime when ventilation can flush heat. Lime plaster finish on exterior improves reflectivity. Avoid cement plaster which traps moisture.",
+            "parameters": {
+                "wall_thickness_mm": [
+                    350,
+                    600
+                ],
+                "thermal_time_lag_hours": [
+                    8,
+                    10
+                ]
+            }
+        },
+        "confidence": 0.95,
+        "sources": [
+            {
+                "type": "academic_paper",
+                "reference": "Givoni, B. (1998). Climate Considerations in Building and Urban Design. Wiley.",
+                "year": 1998
+            }
+        ],
+        "tags": [
+            "thermal-mass",
+            "wall",
+            "hot-dry",
+            "masonry"
+        ]
+    },
+    {
+        "rule_id": "VR-KUT-001",
+        "name": "Circular Plan for Wind Resistance",
+        "description": "In high-wind, seismically active regions like the Rann of Kutch, use a circular plan form (bhunga) to minimize wind pressure coefficients and distribute seismic forces uniformly.",
+        "region": "Kutch, Gujarat",
+        "climate_zone": "Hot-Dry",
+        "tradition": "Bhunga dwellings of Kutch",
+        "category": "massing",
+        "condition": {
+            "min_wind_speed_ms": 8,
+            "min_temperature_c": 30
+        },
+        "recommendation": {
+            "summary": "Use a circular or near-circular plan form with a conical thatched roof.",
+            "detail": "The plan diameter should be 4–6 m for single units. Wall height should be 2.0–2.4 m with a conical roof rising to 3.5–4.0 m at the centre. Mud walls with embedded wood or bamboo ring beams provide ductility. The conical roof sheds wind loads effectively.",
+            "parameters": {
+                "plan_diameter_m": [
+                    4,
+                    6
+                ],
+                "wall_height_m": [
+                    2.0,
+                    2.4
+                ],
+                "roof_apex_height_m": [
+                    3.5,
+                    4.0
+                ]
+            }
+        },
+        "confidence": 0.88,
+        "sources": [
+            {
+                "type": "field_survey",
+                "reference": "Hunnarshala Foundation field documentation, Bhuj, 2023",
+                "year": 2023
+            },
+            {
+                "type": "artisan_interview",
+                "reference": "Interview with master mason Ramji Patel, Ludiya village, Kutch",
+                "year": 2024
+            }
+        ],
+        "tags": [
+            "wind-resistant",
+            "circular",
+            "bhunga",
+            "kutch",
+            "seismic"
+        ]
+    },
+    {
+        "rule_id": "VR-CRG-001",
+        "name": "Steep Pitched Roof for Heavy Rainfall",
+        "description": "In warm-humid hill regions with annual rainfall exceeding 2500 mm, use steeply pitched roofs (30–45°) with wide eaves (600–900 mm) to shed rain rapidly and protect walls from splash erosion.",
+        "region": "Kodagu, Karnataka",
+        "climate_zone": "Warm-Humid",
+        "tradition": "Ainmane architecture of Kodagu",
+        "category": "roof",
+        "condition": {
+            "rainfall_mm_annual_min": 2500,
+            "humidity_pct_min": 70
+        },
+        "recommendation": {
+            "summary": "Pitch roof at 30–45° with eaves projecting 600–900 mm beyond walls.",
+            "detail": "Use Mangalore tiles or thatch. The steep pitch ensures rapid rainwater runoff and reduces wind-driven rain ingress. Wide eaves shade walls and openings, reducing solar heat gain and protecting mud/laterite walls from erosion. Include a rain gutter system to harvest runoff.",
+            "parameters": {
+                "roof_pitch_degrees": [
+                    30,
+                    45
+                ],
+                "eave_projection_mm": [
+                    600,
+                    900
+                ]
+            }
+        },
+        "confidence": 0.90,
+        "sources": [
+            {
+                "type": "academic_paper",
+                "reference": "Dili, A.S. et al. (2010). Thermal Performance of Vernacular Architecture in Kerala and Kodagu. Energy and Buildings, 42(5), 685–696.",
+                "year": 2010
+            }
+        ],
+        "tags": [
+            "rainfall",
+            "pitched-roof",
+            "warm-humid",
+            "coorg"
+        ]
+    },
+    {
+        "rule_id": "VR-CRG-002",
+        "name": "Cross-Ventilation Through Opposing Openings",
+        "description": "In warm-humid climates, ensure cross-ventilation by placing openings on opposite or adjacent walls aligned with prevailing wind direction to remove indoor heat and moisture.",
+        "region": "Kodagu, Karnataka",
+        "climate_zone": "Warm-Humid",
+        "tradition": "Ainmane architecture of Kodagu",
+        "category": "ventilation",
+        "condition": {
+            "humidity_pct_min": 65,
+            "min_temperature_c": 22
+        },
+        "recommendation": {
+            "summary": "Place openings on at least two opposite walls, with the inlet-to-outlet area ratio between 1:1 and 1:1.25.",
+            "detail": "Inlet openings should face the prevailing wind (typically SW monsoon). Outlet openings should be slightly larger or at a higher level to create stack-enhanced cross-ventilation. Use louvred shutters to allow airflow while controlling rain ingress. Minimum opening area should be 15–20% of floor area.",
+            "parameters": {
+                "opening_area_pct_of_floor": [
+                    15,
+                    20
+                ],
+                "inlet_outlet_ratio": [
+                    1.0,
+                    1.25
+                ],
+                "prevailing_wind": "SW"
+            }
+        },
+        "confidence": 0.87,
+        "sources": [
+            {
+                "type": "academic_paper",
+                "reference": "Rajapaksha, I. & Hyde, R. (2012). Barriers to and opportunities for advanced passive cooling in South Asia. Architectural Science Review, 55(1), 49–60.",
+                "year": 2012
+            }
+        ],
+        "tags": [
+            "ventilation",
+            "cross-ventilation",
+            "warm-humid",
+            "openings"
+        ]
+    },
+    {
+        "rule_id": "VR-GEN-001",
+        "name": "Orient Long Axis East–West",
+        "description": "For all climate zones in the Indian subcontinent, orient the building's long axis along the east–west direction to minimize solar heat gain on the longer facades (north and south) while maximizing winter solar access on the south.",
+        "region": "Pan-India",
+        "climate_zone": "Composite",
+        "tradition": "Common across multiple traditions",
+        "category": "orientation",
+        "condition": {},
+        "recommendation": {
+            "summary": "Align the building's long axis within ±15° of the east–west direction.",
+            "detail": "The north and south facades receive less intense solar radiation due to lower sun angles (especially south in winter, which is desirable). The shorter east and west facades can be minimized or shaded with trees/walls to reduce morning and afternoon heat gain. This is one of the most universally beneficial passive design strategies.",
+            "parameters": {
+                "long_axis_azimuth_deg": [
+                    75,
+                    105
+                ],
+                "east_west_facade_max_pct": 35
+            }
+        },
+        "confidence": 0.96,
+        "sources": [
+            {
+                "type": "building_code",
+                "reference": "NBC 2016 — National Building Code of India, Part 8: Building Services, Section 1: Lighting and Ventilation",
+                "year": 2016
+            },
+            {
+                "type": "academic_paper",
+                "reference": "Bansal, N.K. & Minke, G. (1988). Climatic Zones and Rural Housing in India. KFA Jülich.",
+                "year": 1988
+            }
+        ],
+        "tags": [
+            "orientation",
+            "passive-design",
+            "universal",
+            "solar-gain"
+        ]
+    }
+]

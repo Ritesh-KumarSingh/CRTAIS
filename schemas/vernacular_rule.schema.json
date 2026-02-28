@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crtais.dev/schemas/vernacular_rule",
+  "title": "Vernacular Rule",
+  "description": "A climate-responsive architectural rule derived from traditional building practices.",
+  "type": "object",
+  "required": ["rule_id", "name", "description", "region", "climate_zone", "tradition", "condition", "recommendation"],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "Unique identifier for the rule",
+      "pattern": "^VR-[A-Z]{2,4}-\\d{3,5}$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Short human-readable name",
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation of the rule and its rationale"
+    },
+    "region": {
+      "type": "string",
+      "description": "Geographic region where this rule originates (e.g., 'Western Rajasthan')"
+    },
+    "climate_zone": {
+      "type": "string",
+      "description": "Climate classification (e.g., 'Hot-Dry', 'Warm-Humid', 'Composite')",
+      "enum": ["Hot-Dry", "Warm-Humid", "Cold-Dry", "Cold-Cloudy", "Composite", "Temperate", "Moderate"]
+    },
+    "tradition": {
+      "type": "string",
+      "description": "Named vernacular tradition (e.g., 'Haveli architecture of Shekhawati')"
+    },
+    "category": {
+      "type": "string",
+      "description": "Design category this rule applies to",
+      "enum": ["orientation", "massing", "courtyard", "wall", "roof", "openings", "ventilation", "shading", "materials", "landscape", "water"]
+    },
+    "condition": {
+      "type": "object",
+      "description": "Conditions under which this rule applies",
+      "properties": {
+        "min_temperature_c": { "type": "number" },
+        "max_temperature_c": { "type": "number" },
+        "wind_direction": {
+          "type": "string",
+          "enum": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "any"]
+        },
+        "min_wind_speed_ms": { "type": "number" },
+        "slope_degrees_max": { "type": "number" },
+        "rainfall_mm_annual_min": { "type": "number" },
+        "rainfall_mm_annual_max": { "type": "number" },
+        "humidity_pct_min": { "type": "number" },
+        "humidity_pct_max": { "type": "number" },
+        "solar_radiation_kwh_m2_day_min": { "type": "number" }
+      },
+      "additionalProperties": true
+    },
+    "recommendation": {
+      "type": "object",
+      "description": "Actionable design recommendation produced by this rule",
+      "required": ["summary"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "One-line actionable recommendation"
+        },
+        "detail": {
+          "type": "string",
+          "description": "Extended explanation with dimensions, ratios, or construction notes"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Quantitative parameters (e.g., wall_thickness_mm, courtyard_ratio)",
+          "additionalProperties": true
+        }
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Confidence score 0–1 based on source quality and consensus",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sources": {
+      "type": "array",
+      "description": "Provenance references",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["academic_paper", "field_survey", "artisan_interview", "building_code", "historical_record"]
+          },
+          "reference": { "type": "string" },
+          "year": { "type": "integer" },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

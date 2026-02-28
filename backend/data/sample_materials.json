@@ -1,0 +1,134 @@
+[
+    {
+        "material_id": "MAT-001",
+        "name": "Compressed Stabilized Earth Blocks (CSEB)",
+        "category": "masonry",
+        "description": "Earth blocks compressed with a manual or hydraulic press, stabilized with 5-10% cement or lime. High thermal mass.",
+        "region": "All India",
+        "properties": {
+            "thermal_conductivity": 0.85,
+            "density": 1800,
+            "specific_heat": 850
+        },
+        "sustainability": {
+            "embodied_carbon": 35.0,
+            "local_availability": "high",
+            "recyclability": "high"
+        },
+        "tags": [
+            "earth",
+            "thermal_mass",
+            "low_carbon"
+        ]
+    },
+    {
+        "material_id": "MAT-002",
+        "name": "Laterite Stone",
+        "category": "masonry",
+        "description": "Porous, iron-rich rock easily cut when wet but hardens on exposure. Widely used in coastal and southern India.",
+        "region": "West Coast, Kerala, Karnataka, Goa",
+        "properties": {
+            "thermal_conductivity": 1.2,
+            "density": 2200,
+            "specific_heat": 800
+        },
+        "sustainability": {
+            "embodied_carbon": 15.0,
+            "local_availability": "medium",
+            "recyclability": "high"
+        },
+        "tags": [
+            "natural_stone",
+            "coastal",
+            "durable"
+        ]
+    },
+    {
+        "material_id": "MAT-003",
+        "name": "Bamboo (Bambusa balcooa / Tulda)",
+        "category": "structural",
+        "description": "Fast-growing renewable structural material with high tensile strength. Used for roofs, walls, and scaffolding.",
+        "region": "Northeast India, Kerala, Central India",
+        "properties": {
+            "thermal_conductivity": 0.15,
+            "density": 650,
+            "specific_heat": 1200
+        },
+        "sustainability": {
+            "embodied_carbon": -20.0,
+            "local_availability": "high",
+            "recyclability": "high"
+        },
+        "tags": [
+            "renewable",
+            "structural",
+            "carbon_sink"
+        ]
+    },
+    {
+        "material_id": "MAT-004",
+        "name": "Yellow Sandstone (Jaisalmer Stone)",
+        "category": "masonry",
+        "description": "Sedimentary rock used extensively in Rajasthan for heavy load-bearing walls and intricate jalis.",
+        "region": "Rajasthan, Gujarat",
+        "properties": {
+            "thermal_conductivity": 1.8,
+            "density": 2300,
+            "specific_heat": 750
+        },
+        "sustainability": {
+            "embodied_carbon": 45.0,
+            "local_availability": "medium",
+            "recyclability": "high"
+        },
+        "tags": [
+            "natural_stone",
+            "thermal_mass",
+            "hot_dry"
+        ]
+    },
+    {
+        "material_id": "MAT-005",
+        "name": "Thatch (Coconut / Palm Leaves)",
+        "category": "roofing",
+        "description": "Traditional lightweight roofing material providing excellent insulation against solar heat gain.",
+        "region": "Coastal Regions, South India",
+        "properties": {
+            "thermal_conductivity": 0.07,
+            "density": 150,
+            "specific_heat": 1300
+        },
+        "sustainability": {
+            "embodied_carbon": 5.0,
+            "local_availability": "high",
+            "recyclability": "high"
+        },
+        "tags": [
+            "insulation",
+            "roofing",
+            "biodegradable"
+        ]
+    },
+    {
+        "material_id": "MAT-006",
+        "name": "Surkhi (Brick dust mortar)",
+        "category": "finishes",
+        "description": "Traditional mortar made from lime and crushed burnt bricks. Highly breathable and flexible compared to cement.",
+        "region": "North & Central India",
+        "properties": {
+            "thermal_conductivity": 0.9,
+            "density": 1600,
+            "specific_heat": 900
+        },
+        "sustainability": {
+            "embodied_carbon": 85.0,
+            "local_availability": "high",
+            "recyclability": "medium"
+        },
+        "tags": [
+            "mortar",
+            "breathable",
+            "lime"
+        ]
+    }
+]

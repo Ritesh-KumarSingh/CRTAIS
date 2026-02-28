@@ -1,0 +1,115 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://crtais.dev/schemas/material_entry",
+    "title": "Material Entry",
+    "description": "A building material with thermal, structural, and sustainability properties.",
+    "type": "object",
+    "required": [
+        "material_id",
+        "name",
+        "category",
+        "thermal_conductivity",
+        "density",
+        "specific_heat"
+    ],
+    "properties": {
+        "material_id": {
+            "type": "string",
+            "pattern": "^MAT-[A-Z]{2,4}-\\d{3,5}$"
+        },
+        "name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "category": {
+            "type": "string",
+            "enum": [
+                "masonry",
+                "earth",
+                "timber",
+                "bamboo",
+                "stone",
+                "lime",
+                "cement",
+                "insulation",
+                "roofing",
+                "composite",
+                "other"
+            ]
+        },
+        "thermal_conductivity": {
+            "type": "number",
+            "description": "W/(m·K)",
+            "minimum": 0
+        },
+        "density": {
+            "type": "number",
+            "description": "kg/m³",
+            "minimum": 0
+        },
+        "specific_heat": {
+            "type": "number",
+            "description": "J/(kg·K)",
+            "minimum": 0
+        },
+        "embodied_carbon": {
+            "type": "number",
+            "description": "kgCO₂e/kg — cradle-to-gate",
+            "minimum": 0
+        },
+        "compressive_strength_mpa": {
+            "type": "number",
+            "minimum": 0
+        },
+        "moisture_absorption_pct": {
+            "type": "number",
+            "description": "% by weight",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "regions": {
+            "type": "array",
+            "description": "Regions where this material is locally available",
+            "items": {
+                "type": "string"
+            }
+        },
+        "availability": {
+            "type": "string",
+            "enum": [
+                "abundant",
+                "moderate",
+                "scarce",
+                "seasonal"
+            ]
+        },
+        "cost_index": {
+            "type": "number",
+            "description": "Relative cost index (1.0 = baseline local brick)",
+            "minimum": 0
+        },
+        "sustainability_notes": {
+            "type": "string"
+        },
+        "sources": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "reference": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

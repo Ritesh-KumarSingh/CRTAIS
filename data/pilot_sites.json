@@ -1,0 +1,116 @@
+[
+    {
+        "site_id": "SITE-001",
+        "name": "Jaipur Old City Pilot",
+        "description": "Haveli-style residential plot in the walled city of Jaipur, representative of hot-dry desert architecture.",
+        "latitude": 26.9239,
+        "longitude": 75.8267,
+        "climate_zone": "Hot-Dry",
+        "vernacular_tradition": "Haveli architecture of Rajasthan",
+        "plot_area_sqm": 320,
+        "polygon_geojson": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [
+                        75.8262,
+                        26.9236
+                    ],
+                    [
+                        75.8272,
+                        26.9236
+                    ],
+                    [
+                        75.8272,
+                        26.9242
+                    ],
+                    [
+                        75.8262,
+                        26.9242
+                    ],
+                    [
+                        75.8262,
+                        26.9236
+                    ]
+                ]
+            ]
+        },
+        "notes": "Narrow street canyon, high thermal mass walls, internal courtyard expected."
+    },
+    {
+        "site_id": "SITE-002",
+        "name": "Kutch Bhunga Village",
+        "description": "Circular bhunga dwelling site in the Rann of Kutch, representing indigenous earthquake-resistant and heat-adaptive architecture.",
+        "latitude": 23.7337,
+        "longitude": 69.8597,
+        "climate_zone": "Hot-Dry",
+        "vernacular_tradition": "Bhunga dwellings of Kutch",
+        "plot_area_sqm": 500,
+        "polygon_geojson": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [
+                        69.8590,
+                        23.7332
+                    ],
+                    [
+                        69.8604,
+                        23.7332
+                    ],
+                    [
+                        69.8604,
+                        23.7342
+                    ],
+                    [
+                        69.8590,
+                        23.7342
+                    ],
+                    [
+                        69.8590,
+                        23.7332
+                    ]
+                ]
+            ]
+        },
+        "notes": "Open terrain, high wind exposure, mud and thatch construction, circular plan form."
+    },
+    {
+        "site_id": "SITE-003",
+        "name": "Coorg Ainmane Homestead",
+        "description": "Traditional Kodava ainmane (ancestral home) in the Western Ghats, representing warm-humid hill architecture.",
+        "latitude": 12.4244,
+        "longitude": 75.7382,
+        "climate_zone": "Warm-Humid",
+        "vernacular_tradition": "Ainmane architecture of Kodagu",
+        "plot_area_sqm": 800,
+        "polygon_geojson": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [
+                        75.7375,
+                        12.4240
+                    ],
+                    [
+                        75.7389,
+                        12.4240
+                    ],
+                    [
+                        75.7389,
+                        12.4248
+                    ],
+                    [
+                        75.7375,
+                        12.4248
+                    ],
+                    [
+                        75.7375,
+                        12.4240
+                    ]
+                ]
+            ]
+        },
+        "notes": "Sloped terrain, heavy monsoon rainfall, pitched roof with wide eaves, timber and laterite stone."
+    }
+]
