@@ -1,0 +1,230 @@
+# CRTAIS — Implementation Plan (Phase 0 + Phase 1 Sprint 1)
+
+This plan covers the initial build for the **Climate-Responsive Traditional Architecture Intelligence System** — an actionable platform that encodes vernacular architectural wisdom, performs thermal/airflow simulations, and generates practitioner-ready reports.
+
+> [!IMPORTANT]
+> This is a very large, multi-month project. This plan covers **Phase 0 (preparation)** and **Phase 1 Sprint 1 (scaffold + site intake)**. Subsequent phases will be planned after this foundation is built, tested, and reviewed.
+
+---
+
+## User Review Required
+
+1. **Next.js version** — The plan uses **Next.js 14** with the App Router. Confirm this is acceptable.
+2. **Tailwind CSS version** — Will use **Tailwind CSS v3** (the user spec says Tailwind, overriding the default vanilla CSS guideline). Confirm.
+3. **Map provider** — Plan uses **Leaflet** (free, no API key) instead of Mapbox. Switch to Mapbox if preferred (requires API key).
+4. **Database hosting** — Initial dev uses local Docker containers for PostgreSQL/PostGIS and MongoDB. Confirm Docker is available, or specify alternative.
+5. **Pilot site locations** — The plan seeds 3 example sites (Jaipur, Kutch, Coorg). Please confirm or provide your preferred pilot sites and climate zones.
+
+---
+
+## Proposed Directory Structure
+
+```
+e:\CRTAIS\
+├── frontend\                    # Next.js 14 + Tailwind CSS
+│   ├── app\                     # App Router pages
+│   │   ├── layout.tsx
+│   │   ├── page.tsx             # Landing / dashboard
+│   │   ├── site-intake\
+│   │   │   └── page.tsx         # Site intake form
+│   │   ├── map-view\
+│   │   │   └── page.tsx         # Geospatial overlay view
+│   │   └── rules\
+│   │       └── page.tsx         # Rule suggestions (Sprint 3)
+│   ├── components\
+│   │   ├── ui\                  # Reusable UI primitives
+│   │   ├── maps\                # Map & geospatial components
+│   │   ├── forms\               # Form components
+│   │   └── layout\              # Layout components (nav, sidebar)
+│   ├── lib\                     # Utilities, API clients, types
+│   ├── public\                  # Static assets
+│   ├── tailwind.config.ts
+│   ├── next.config.js
+│   └── package.json
+│
+├── backend\                     # FastAPI (Python)
+│   ├── app\
+│   │   ├── main.py              # FastAPI entry point
+│   │   ├── config.py            # Settings / env
+│   │   ├── routers\
+│   │   │   ├── sites.py         # Site intake CRUD
+│   │   │   ├── rules.py         # Vernacular rule endpoints
+│   │   │   └── health.py        # Health check
+│   │   ├── models\
+│   │   │   ├── site.py          # SQLAlchemy + GeoAlchemy2 models
+│   │   │   └── rule.py          # Pydantic models for rules
+│   │   ├── schemas\
+│   │   │   ├── site_schema.py   # Request/Response schemas
+│   │   │   └── rule_schema.py
+│   │   ├── services\
+│   │   │   ├── spatial.py       # PostGIS spatial queries
+│   │   │   └── rule_engine.py   # Rule evaluator
+│   │   └── db\
+│   │       ├── postgres.py      # PostgreSQL connection
+│   │       └── mongo.py         # MongoDB connection
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── .env.example
+│
+├── schemas\                     # Shared JSON schemas
+│   ├── vernacular_rule.schema.json
+│   └── material_entry.schema.json
+│
+├── data\                        # Seed / reference data
+│   ├── pilot_sites.json
+│   ├── sample_rules.json
+│   └── climate_sources.md
+│
+├── docker-compose.yml           # PostGIS + MongoDB containers
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Proposed Changes
+
+### Phase 0 — Project Preparation
+
+#### [NEW] [README.md](file:///e:/CRTAIS/README.md)
+Project overview, setup instructions, architecture diagram, and contribution guidelines.
+
+#### [NEW] [docker-compose.yml](file:///e:/CRTAIS/docker-compose.yml)
+Docker Compose configuration for:
+- **PostgreSQL 16 + PostGIS 3.4** on port 5432
+- **MongoDB 7** on port 27017
+
+#### [NEW] [.gitignore](file:///e:/CRTAIS/.gitignore)
+Standard gitignore for Node.js + Python + environment files.
+
+---
+
+#### [NEW] [vernacular_rule.schema.json](file:///e:/CRTAIS/schemas/vernacular_rule.schema.json)
+JSON Schema defining a vernacular rule entry:
+- `rule_id`, `name`, `description`
+- `region`, `climate_zone`, `tradition` (provenance)
+- `condition` (when the rule applies — orientation, slope, wind)
+- `recommendation` (what to do — wall thickness, courtyard ratio, etc.)
+- `confidence`, `sources[]`
+
+#### [NEW] [material_entry.schema.json](file:///e:/CRTAIS/schemas/material_entry.schema.json)
+JSON Schema for material library entries:
+- `material_id`, `name`, `category`
+- `thermal_conductivity`, `density`, `specific_heat`, `embodied_carbon`
+- `region[]`, `availability`, `cost_index`
+
+#### [NEW] [climate_sources.md](file:///e:/CRTAIS/data/climate_sources.md)
+Documentation of baseline climate dataset sources (TMY, ERA5, IMD, NASA POWER, SRTM).
+
+#### [NEW] [pilot_sites.json](file:///e:/CRTAIS/data/pilot_sites.json)
+Seed data for 3 pilot sites with coordinates, climate zone, and vernacular traditions.
+
+#### [NEW] [sample_rules.json](file:///e:/CRTAIS/data/sample_rules.json)
+5–10 sample vernacular rules (e.g., Jaipur courtyard proportions, Kutch windcatchers, Coorg sloped roofs).
+
+---
+
+### Sprint 1 — Frontend Scaffold
+
+#### [NEW] Next.js 14 project in `e:\CRTAIS\frontend\`
+Initialized via `npx -y create-next-app@14 ./` with TypeScript, Tailwind CSS, App Router, ESLint.
+
+#### [NEW] [page.tsx](file:///e:/CRTAIS/frontend/app/page.tsx)
+Landing dashboard with:
+- Hero section introducing CRTAIS
+- Quick-action cards (New Site Intake, View Map, Browse Rules)
+- Premium dark theme with glassmorphism cards, gradient accents, smooth animations
+
+#### [NEW] [layout.tsx](file:///e:/CRTAIS/frontend/app/layout.tsx)
+Root layout with:
+- Google Font (Inter)
+- Global navigation sidebar (collapsible)
+- Dark mode by default
+
+#### [NEW] [page.tsx](file:///e:/CRTAIS/frontend/app/site-intake/page.tsx)
+Site intake form page:
+- Coordinate input (lat/lng) with map pin drop
+- Plot polygon upload (GeoJSON file) or draw-on-map
+- Climate zone auto-detection
+- Building typology selector
+- Submit → POST to FastAPI `/api/sites`
+
+#### [NEW] Components in `frontend/components/`
+- `Sidebar.tsx` — navigation sidebar
+- `SiteIntakeForm.tsx` — the intake form component
+- `MapPicker.tsx` — Leaflet map for pin drop / polygon draw
+
+---
+
+### Sprint 1 — Backend Scaffold
+
+#### [NEW] FastAPI project in `e:\CRTAIS\backend\`
+
+#### [NEW] [main.py](file:///e:/CRTAIS/backend/app/main.py)
+FastAPI application with CORS middleware, router registration, startup event for DB connections.
+
+#### [NEW] [config.py](file:///e:/CRTAIS/backend/app/config.py)
+Pydantic Settings for PostgreSQL DSN, MongoDB URI, and other env vars.
+
+#### [NEW] [sites.py](file:///e:/CRTAIS/backend/app/routers/sites.py)
+REST endpoints:
+- `POST /api/sites` — create a new site (stores geometry in PostGIS)
+- `GET /api/sites` — list all sites
+- `GET /api/sites/{id}` — get site detail with geometry
+- `DELETE /api/sites/{id}` — remove a site
+
+#### [NEW] [health.py](file:///e:/CRTAIS/backend/app/routers/health.py)
+`GET /api/health` — returns DB connection status.
+
+#### [NEW] [site.py](file:///e:/CRTAIS/backend/app/models/site.py)
+SQLAlchemy model with GeoAlchemy2 geometry column for plot polygon storage.
+
+#### [NEW] [site_schema.py](file:///e:/CRTAIS/backend/app/schemas/site_schema.py)
+Pydantic schemas for site create/read operations with GeoJSON geometry support.
+
+#### [NEW] [postgres.py](file:///e:/CRTAIS/backend/app/db/postgres.py)
+Async SQLAlchemy engine + session factory for PostGIS.
+
+#### [NEW] [mongo.py](file:///e:/CRTAIS/backend/app/db/mongo.py)
+Motor (async MongoDB driver) client setup.
+
+#### [NEW] [requirements.txt](file:///e:/CRTAIS/backend/requirements.txt)
+Dependencies: `fastapi`, `uvicorn`, `sqlalchemy`, `geoalchemy2`, `asyncpg`, `motor`, `pydantic-settings`, `python-dotenv`, `alembic`.
+
+#### [NEW] [.env.example](file:///e:/CRTAIS/backend/.env.example)
+Template environment variables.
+
+---
+
+## Verification Plan
+
+### Automated Tests
+
+1. **Frontend build check**
+   ```bash
+   cd e:\CRTAIS\frontend && npm run build
+   ```
+   Expects: successful Next.js production build with zero errors.
+
+2. **Backend startup check**
+   ```bash
+   cd e:\CRTAIS\backend && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+   ```
+   Expects: server starts, `/api/health` returns `200 OK`.
+
+3. **Docker services**
+   ```bash
+   cd e:\CRTAIS && docker-compose up -d
+   ```
+   Expects: PostgreSQL and MongoDB containers running, accepting connections.
+
+### Manual Verification
+
+1. **Open browser** → `http://localhost:3000` — verify landing dashboard renders with dark theme, cards, and navigation.
+2. **Navigate to Site Intake** → fill in coordinates → drop pin on map → submit form → verify `POST /api/sites` is called (check browser Network tab or backend logs).
+3. **Check API docs** → `http://localhost:8000/docs` — Swagger UI should list all endpoints with correct schemas.
+
+### User Testing (recommended)
+
+> [!TIP]
+> After Sprint 1 is built, please manually test the site intake flow end-to-end and share feedback on the UI/UX, form fields, and map interaction before we proceed to Sprint 2 (geospatial overlays + rule engine).

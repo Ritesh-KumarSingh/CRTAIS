@@ -33,21 +33,21 @@ export default function Sidebar() {
     return (
         <aside
             className={`fixed top-0 left-0 h-screen z-50 flex flex-col
-        bg-surface-950/80 backdrop-blur-xl border-r border-white/[0.06]
+        bg-white/90 backdrop-blur-xl border-r border-slate-200
         transition-all duration-300 ease-in-out
         ${collapsed ? "w-[var(--sidebar-collapsed)]" : "w-[var(--sidebar-width)]"}`}
         >
             {/* Logo */}
-            <div className="flex items-center gap-3 px-5 h-16 border-b border-white/[0.06]">
+            <div className="flex items-center gap-3 px-5 h-16 border-b border-slate-200">
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center flex-shrink-0">
-                    <Compass className="w-5 h-5 text-white" />
+                    <Compass className="w-5 h-5 text-slate-800" />
                 </div>
                 {!collapsed && (
                     <div className="animate-fade-in">
                         <h1 className="text-base font-bold tracking-tight gradient-text">
                             CRTAIS
                         </h1>
-                        <p className="text-[10px] text-white/40 leading-tight -mt-0.5">
+                        <p className="text-[10px] text-slate-500 leading-tight -mt-0.5">
                             Architecture Intelligence
                         </p>
                     </div>
@@ -69,12 +69,12 @@ export default function Sidebar() {
                                     ? "opacity-30 cursor-not-allowed"
                                     : isActive
                                         ? "bg-primary-500/15 text-primary-400 shadow-glow"
-                                        : "text-white/50 hover:text-white/80 hover:bg-white/[0.04]"
+                                        : "text-slate-500 hover:text-slate-500 hover:bg-slate-100"
                                 }`}
                             onClick={(e) => item.disabled && e.preventDefault()}
                         >
                             <Icon
-                                className={`w-5 h-5 flex-shrink-0 transition-colors duration-200 ${isActive ? "text-primary-400" : "text-white/40 group-hover:text-white/70"
+                                className={`w-5 h-5 flex-shrink-0 transition-colors duration-200 ${isActive ? "text-primary-400" : "text-slate-500 group-hover:text-slate-500"
                                     }`}
                             />
                             {!collapsed && (
@@ -93,7 +93,7 @@ export default function Sidebar() {
             {/* Collapse toggle */}
             <button
                 onClick={() => setCollapsed(!collapsed)}
-                className="flex items-center justify-center h-12 border-t border-white/[0.06] text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-all duration-200"
+                className="flex items-center justify-center h-12 border-t border-slate-200 text-slate-500 hover:text-slate-500 hover:bg-slate-100 transition-all duration-200"
                 aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
                 {collapsed ? (

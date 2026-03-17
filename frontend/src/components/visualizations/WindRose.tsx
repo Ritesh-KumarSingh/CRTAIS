@@ -32,8 +32,8 @@ const sampleData: WindDataPoint[] = [
 
 export default function WindRose({ data = sampleData }: { data?: WindDataPoint[] }) {
     return (
-        <div className="w-full h-[300px] bg-white/[0.02] border border-white/[0.05] rounded-xl flex flex-col items-center justify-center p-4">
-            <h3 className="text-sm font-semibold text-white/70 mb-2 mt-2 w-full text-left">
+        <div className="w-full h-[300px] bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center p-4">
+            <h3 className="text-sm font-semibold text-slate-500 mb-2 mt-2 w-full text-left">
                 Annual Wind Rose
             </h3>
             <div className="flex-1 w-full min-h-0">
@@ -79,7 +79,7 @@ export default function WindRose({ data = sampleData }: { data?: WindDataPoint[]
                     </RadarChart>
                 </ResponsiveContainer>
             </div>
-            <div className="flex items-center gap-4 text-[10px] text-white/40 mt-1">
+            <div className="flex items-center gap-4 text-[10px] text-slate-500 mt-1">
                 <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#0c8ee6] opacity-40"></div>1-3 m/s</div>
                 <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#36aaf5] opacity-60"></div>3-5 m/s</div>
                 <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-[#e0654e] opacity-80"></div>&gt; 5 m/s</div>

@@ -17,8 +17,8 @@ export default function MapViewPage() {
     return (
         <div className="space-y-6 animate-fade-in">
             <div>
-                <h1 className="text-2xl font-bold text-white mb-1">Map View</h1>
-                <p className="text-sm text-white/40">
+                <h1 className="text-2xl font-bold text-slate-800 mb-1">Map View</h1>
+                <p className="text-sm text-slate-500">
                     Explore pilot sites with geospatial overlays. Click a marker to view site details.
                 </p>
             </div>

@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #0d0f14;
-  --foreground: #e8ecf4;
+  --background: #f8fafc;
+  --foreground: #0f172a;
   --sidebar-width: 260px;
   --sidebar-collapsed: 72px;
 }
@@ -34,21 +34,21 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 /* Glass card utility */
 @layer components {
   .glass-card {
-    @apply bg-white/[0.04] backdrop-blur-md border border-white/[0.06] rounded-2xl;
+    @apply bg-white/70 backdrop-blur-md border border-slate-200/60 rounded-2xl shadow-sm;
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:bg-white/[0.07] hover:border-white/[0.1] hover:shadow-glass;
+    @apply glass-card transition-all duration-300 hover:bg-white/90 hover:border-slate-300 hover:shadow-md;
   }
 
   .gradient-text {
@@ -70,8 +70,8 @@ body {
   }
 
   .btn-secondary {
-    @apply px-5 py-2.5 bg-white/[0.06] border border-white/[0.1] text-white font-medium rounded-xl
-           transition-all duration-300 hover:bg-white/[0.1] hover:border-white/[0.15]
+    @apply px-5 py-2.5 bg-slate-100 border border-slate-200 text-slate-700 font-medium rounded-xl
+           transition-all duration-300 hover:bg-slate-200 hover:border-slate-300
            active:scale-[0.98];
   }
 
@@ -82,35 +82,35 @@ body {
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white
-           placeholder-white/30 transition-all duration-300
-           focus:outline-none focus:border-primary-500/50 focus:bg-white/[0.06] focus:shadow-glow;
+    @apply w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800
+           placeholder-slate-400 transition-all duration-300
+           focus:outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-100 focus:bg-white;
   }
 
   .label-text {
-    @apply block text-sm font-medium text-white/70 mb-1.5;
+    @apply block text-sm font-medium text-slate-600 mb-1.5;
   }
 }
 
-/* Leaflet map overrides for dark mode */
+/* Leaflet map overrides for light mode */
 .leaflet-container {
-  background: #1a1b23 !important;
+  background: #f1f5f9 !important;
   border-radius: 1rem;
 }
 .leaflet-control-zoom a {
-  background: rgba(26, 27, 35, 0.9) !important;
-  color: #e8ecf4 !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #0f172a !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
 }
 .leaflet-control-zoom a:hover {
-  background: rgba(40, 42, 54, 0.95) !important;
+  background: #f8fafc !important;
 }
 .leaflet-popup-content-wrapper {
-  background: rgba(26, 27, 35, 0.95) !important;
-  color: #e8ecf4 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #0f172a !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
 }
 .leaflet-popup-tip {
-  background: rgba(26, 27, 35, 0.95) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
 }

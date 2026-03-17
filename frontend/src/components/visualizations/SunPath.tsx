@@ -30,12 +30,12 @@ const sampleData = [
 
 export default function SunPath({ data = sampleData }: { data?: SunPathData[] }) {
     return (
-        <div className="w-full h-[300px] bg-white/[0.02] border border-white/[0.05] rounded-xl flex flex-col p-4">
+        <div className="w-full h-[300px] bg-slate-100 border border-slate-200 rounded-xl flex flex-col p-4">
             <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-white/70">
+                <h3 className="text-sm font-semibold text-slate-500">
                     Solar Elevation (Sun Path)
                 </h3>
-                <div className="flex items-center gap-3 text-[10px] text-white/40">
+                <div className="flex items-center gap-3 text-[10px] text-slate-500">
                     <div className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded bg-amber-500"></div> Summer Solstice
                     </div>

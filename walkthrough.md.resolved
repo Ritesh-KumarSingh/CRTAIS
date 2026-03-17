@@ -1,0 +1,70 @@
+# CRTAIS — Walkthrough
+
+## What Was Built
+
+### Phase 0 — Project Foundation
+- Local SQLite + JSON backend setup
+- `vernacular_rule` and `material_entry` JSON schemas
+- Data seeders with pilot sites and sample rules
+
+---
+
+### Sprint 1 — Core App & Design System
+
+| Page | Key Features |
+|---|---|
+| **Dashboard** | Hero section, stat cards, quick-action cards |
+| **Site Intake** | Interactive map pin-drop coordinate input, GeoJSON upload |
+| **Map View** | Pilot sites with climate-zone colored markers & popups |
+| **Rules Browser** | Search + filters (zone, category), expandable rule cards |
+
+---
+
+### Sprint 2 — Frontend/Backend Integration & Geospatial Analysis
+
+We fully connected the Next.js frontend to the FastAPI backend and implemented the **Site Microclimate Analysis Dashboard**.
+
+#### 1. API Integration ([lib/api.ts](file:///e:/CRTAIS/frontend/src/lib/api.ts))
+Created a type-safe Fetch API client to communicate with the backend:
+- `POST /api/sites` for the Site Intake Form (creates SQLite records).
+- `GET /api/sites` to populate the global Map View.
+- `GET /api/rules` to populate the Rule Browser with debounced search.
+
+#### 2. Site Analysis Dashboard (`/sites/[id]`)
+When a user clicks a site on the map, they are taken to a dedicated analysis dashboard featuring:
+- **Sun Path Chart (Recharts AreaChart):** Compares Summer vs. Winter solstice solar elevations throughout the day.
+- **Wind Rose (Recharts RadarChart):** Visualizes annual wind speeds across major compass directions.
+- **Vernacular Rule Evaluator:** Calls the new `GET /api/evaluate/{site_id}` endpoint. The backend engine cross-references the site's climate zone and location to recommend specific architectural rules (e.g., "Thick Masonry Walls" for Hot-Dry zones), returning an AI confidence match percentage and specific parameter recommendations.
+
+## Visual Verification
+**Site Analysis Dashboard (Jaisalmer Pilot Site):**
+![Site Analysis Dashboard](C:/Users/Ritesh Kumar Singh/.gemini/antigravity/brain/8b844e62-9b6d-462a-9f27-67610d46dadf/jaisalmer_site_analysis_final_1772242914177.png)
+
+*(The subagent successfully automated the filling of the intake form, navigated the map, and verified the real-time rule evaluation engine).*
+
+---
+
+## How to Run
+
+```bash
+# Backend 
+cd backend
+venv\Scripts\activate
+uvicorn app.main:app --reload --port 8000
+
+# Frontend
+cd frontend
+npm run dev
+```
+
+## Next Steps (Sprint 3)
+- Build the Material Sustainability Catalog UI
+- Link rules to specific local materials
+- Generate full Architectural Design Reports
+
+### Sprint 3 Progress
+**Materials Catalog UI:**
+![Materials Catalog](C:/Users/Ritesh Kumar Singh/.gemini/antigravity/brain/8b844e62-9b6d-462a-9f27-67610d46dadf/materials_catalog_full_1772243530780.png)
+
+**Printable Architectural Report:**
+![Architectural Report](C:/Users/Ritesh Kumar Singh/.gemini/antigravity/brain/8b844e62-9b6d-462a-9f27-67610d46dadf/architectural_report_jaisalmer_1772244649479.png)

@@ -9,6 +9,60 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 // Synthetic outdoor temp profile (e.g. desert-like swing)
 const DEFAULT_T_OUT = [16, 15, 14, 13, 13, 14, 16, 19, 23, 27, 30, 32, 33, 33, 32, 30, 27, 24, 21, 19, 18, 17, 17, 16];
 
+const fallbackSitesData: Site[] = [
+    {
+        id: "SITE-001",
+        name: "Jaipur Old City Pilot",
+        description: "Haveli-style residential plot in the walled city of Jaipur, representative of hot-dry desert architecture.",
+        latitude: 26.9239,
+        longitude: 75.8267,
+        climate_zone: "Hot-Dry",
+        typology: "Residential",
+        vernacular_tradition: "Haveli architecture of Rajasthan",
+        plot_area_sqm: 320,
+        polygon: {
+            type: "Polygon",
+            coordinates: [[[75.8262, 26.9236], [75.8272, 26.9236], [75.8272, 26.9242], [75.8262, 26.9242], [75.8262, 26.9236]]]
+        },
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    },
+    {
+        id: "SITE-002",
+        name: "Kutch Bhunga Village",
+        description: "Circular bhunga dwelling site in the Rann of Kutch, representing indigenous earthquake-resistant and heat-adaptive architecture.",
+        latitude: 23.7337,
+        longitude: 69.8597,
+        climate_zone: "Hot-Dry",
+        typology: "Residential",
+        vernacular_tradition: "Bhunga dwellings of Kutch",
+        plot_area_sqm: 500,
+        polygon: {
+            type: "Polygon",
+            coordinates: [[[69.8590, 23.7332], [69.8604, 23.7332], [69.8604, 23.7342], [69.8590, 23.7342], [69.8590, 23.7332]]]
+        },
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    },
+    {
+        id: "SITE-003",
+        name: "Coorg Ainmane Homestead",
+        description: "Traditional Kodava ainmane (ancestral home) in the Western Ghats, representing warm-humid hill architecture.",
+        latitude: 12.4244,
+        longitude: 75.7382,
+        climate_zone: "Warm-Humid",
+        typology: "Residential",
+        vernacular_tradition: "Ainmane architecture of Kodagu",
+        plot_area_sqm: 800,
+        polygon: {
+            type: "Polygon",
+            coordinates: [[[75.7375, 12.4240], [75.7389, 12.4240], [75.7389, 12.4248], [75.7375, 12.4248], [75.7375, 12.4240]]]
+        },
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    }
+];
+
 export default function SiteSimulationPage() {
     const params = useParams();
     const router = useRouter();
@@ -31,6 +85,14 @@ export default function SiteSimulationPage() {
     useEffect(() => {
         sitesApi.get(siteId)
             .then(setSite)
+            .catch((err) => {
+                const fallbackSite = fallbackSitesData.find(s => s.id === siteId);
+                if (fallbackSite) {
+                    setSite(fallbackSite);
+                } else {
+                    console.error("Failed to load site:", err);
+                }
+            })
             .finally(() => setLoadingSite(false));
     }, [siteId]);
 
@@ -101,34 +163,34 @@ export default function SiteSimulationPage() {
 
     return (
         <div className="max-w-6xl mx-auto pb-20 animate-fade-in relative">
-            <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 py-4 mb-8 -mx-8 px-8 flex items-center justify-between">
+            <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 mb-8 -mx-8 px-8 flex items-center justify-between">
                 <button
                     onClick={() => router.push(`/sites/${site.id}`)}
-                    className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+                    className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-800 transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4" /> Back to Site
                 </button>
             </div>
 
             <div className="mb-8">
-                <h1 className="text-3xl font-bold flex items-center gap-3 text-white">
+                <h1 className="text-3xl font-bold flex items-center gap-3 text-slate-800">
                     <Activity className="w-8 h-8 text-primary-400" />
                     Thermal Simulation: {site.name}
                 </h1>
-                <p className="text-white/60 mt-2">
+                <p className="text-slate-500 mt-2">
                     Hourly explicit 1R1C thermal model. Adjust envelope thermal properties to see the effect on indoor temperatures.
                 </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Controls */}
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 lg:col-span-1">
-                    <h2 className="text-lg font-semibold text-white mb-6">Envelope Properties</h2>
+                <div className="bg-slate-100 border border-slate-200 rounded-2xl p-6 lg:col-span-1">
+                    <h2 className="text-lg font-semibold text-slate-800 mb-6">Envelope Properties</h2>
 
                     <div className="space-y-6">
                         <div>
                             <div className="flex justify-between mb-2">
-                                <label className="text-sm font-medium text-white/80">Thermal Resistance (R)</label>
+                                <label className="text-sm font-medium text-slate-500">Thermal Resistance (R)</label>
                                 <span className="text-sm font-mono text-primary-400">{rVal.toFixed(1)} K·m²/W</span>
                             </div>
                             <input
@@ -136,12 +198,12 @@ export default function SiteSimulationPage() {
                                 value={rVal} onChange={e => setRVal(Number(e.target.value))}
                                 className="w-full accent-primary-500"
                             />
-                            <p className="text-xs text-white/40 mt-2">Higher R = better insulation. <br /> (e.g. 0.5 = Uninsulated brick, 5.0 = Passive House wall)</p>
+                            <p className="text-xs text-slate-500 mt-2">Higher R = better insulation. <br /> (e.g. 0.5 = Uninsulated brick, 5.0 = Passive House wall)</p>
                         </div>
 
                         <div>
                             <div className="flex justify-between mb-2">
-                                <label className="text-sm font-medium text-white/80">Thermal Mass (C)</label>
+                                <label className="text-sm font-medium text-slate-500">Thermal Mass (C)</label>
                                 <span className="text-sm font-mono text-cyan-400">{(cVal / 1000).toFixed(0)} kJ/K·m²</span>
                             </div>
                             <input
@@ -149,7 +211,7 @@ export default function SiteSimulationPage() {
                                 value={cVal} onChange={e => setCVal(Number(e.target.value))}
                                 className="w-full accent-cyan-500"
                             />
-                            <p className="text-xs text-white/40 mt-2">Higher C = more thermal mass. <br /> (e.g. 50kJ = lightweight timber, 300kJ = heavy masonry)</p>
+                            <p className="text-xs text-slate-500 mt-2">Higher C = more thermal mass. <br /> (e.g. 50kJ = lightweight timber, 300kJ = heavy masonry)</p>
                         </div>
 
                         <button
@@ -161,12 +223,12 @@ export default function SiteSimulationPage() {
                             Run Simulation
                         </button>
 
-                        <div className="mt-8 pt-8 border-t border-white/10">
-                            <h2 className="text-lg font-semibold text-white mb-6">Ventilation & Airflow</h2>
+                        <div className="mt-8 pt-8 border-t border-slate-200">
+                            <h2 className="text-lg font-semibold text-slate-800 mb-6">Ventilation & Airflow</h2>
                             <div className="space-y-6">
                                 <div>
                                     <div className="flex justify-between mb-2">
-                                        <label className="text-sm font-medium text-white/80">Inlet Area (m²)</label>
+                                        <label className="text-sm font-medium text-slate-500">Inlet Area (m²)</label>
                                         <span className="text-sm font-mono text-emerald-400">{inletArea.toFixed(1)} m²</span>
                                     </div>
                                     <input
@@ -174,11 +236,11 @@ export default function SiteSimulationPage() {
                                         value={inletArea} onChange={e => handleAirflowChange('inlet', Number(e.target.value))}
                                         className="w-full accent-emerald-500"
                                     />
-                                    <p className="text-xs text-white/40 mt-1">Total openable window area facing the wind.</p>
+                                    <p className="text-xs text-slate-500 mt-1">Total openable window area facing the wind.</p>
                                 </div>
                                 <div>
                                     <div className="flex justify-between mb-2">
-                                        <label className="text-sm font-medium text-white/80">Room Volume (m³)</label>
+                                        <label className="text-sm font-medium text-slate-500">Room Volume (m³)</label>
                                         <span className="text-sm font-mono text-indigo-400">{roomVolume.toFixed(0)} m³</span>
                                     </div>
                                     <input
@@ -213,8 +275,8 @@ export default function SiteSimulationPage() {
                 </div>
 
                 {/* Graph View */}
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 lg:col-span-2">
-                    <h2 className="text-lg font-semibold text-white mb-6">24-Hour Temperature Profile</h2>
+                <div className="bg-slate-100 border border-slate-200 rounded-2xl p-6 lg:col-span-2">
+                    <h2 className="text-lg font-semibold text-slate-800 mb-6">24-Hour Temperature Profile</h2>
 
                     <div className="h-[400px] w-full">
                         <ResponsiveContainer width="100%" height="100%">

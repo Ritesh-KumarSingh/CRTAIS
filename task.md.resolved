@@ -1,0 +1,45 @@
+# CRTAIS — Climate-Responsive Traditional Architecture Intelligence System
+
+## Phase 0 — Preparation
+- [x] Create implementation plan and get user approval
+- [x] Initialize repo, set up project structure
+- [x] Create JSON schemas for vernacular rules and material entries
+- [x] Document baseline climate dataset sources for pilot sites
+
+## Phase 1 — Core Platform & Ingestion
+
+### Sprint 1 — Scaffold & Site Intake
+- [x] Scaffold Next.js + Tailwind frontend
+- [x] Scaffold FastAPI backend
+- [x] Implement site intake form (coordinates, polygon upload)
+- [x] Set up PostgreSQL + PostGIS database & spatial API
+- [x] Set up MongoDB for document storage
+
+### Sprint 2 — Frontend-Backend Integration & Geospatial
+- [x] Connect site intake form to POST /api/sites
+- [x] Connect rules browser to GET /api/rules
+- [x] Connect map view to GET /api/sites
+- [x] Add sun path / solar analysis visualization
+- [x] Add wind rose visualization
+- [x] Implement rule evaluator endpoint (rules for a site)
+
+### Sprint 3 — Materials Catalog & Project Reports
+- [x] Build UI to view rule suggestions with provenance
+- [x] Connect rule engine to frontend via API
+- [x] Implement local materials JSON store in backend (`GET /api/materials`)
+- [x] Build Materials Browser UI frontend (`/materials`)
+- [x] Build Printable Architectural Report UI for sites (`/sites/[id]/report`)
+
+## Phase 2 — Simulation MVP & Future Features
+- [ ] Hourly thermal model (RC network)
+- [ ] Steady airflow approximation
+- [ ] 2D plan overlay (SVG)
+- [ ] Three.js 3D massing viewer
+- [ ] Printable masonry briefs
+- [ ] Pilot testing
+
+## Phase 4–5 — Optimization, Monitoring, Scale (future)
+- [ ] Multi-objective optimizer (Optuna)
+- [ ] Material library
+- [ ] IoT / post-occupancy monitoring
+- [ ] Community knowledge capture

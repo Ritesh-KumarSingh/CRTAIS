@@ -6,6 +6,112 @@ import { ArrowLeft, Loader2, Download, MapPin, Grid, Thermometer, Calendar } fro
 import { sitesApi, materialsApi, type Site, type Rule, type Material } from "@/lib/api";
 import PlanOverlay from "@/components/visualizations/PlanOverlay";
 
+const fallbackSitesData: Site[] = [
+    {
+        id: "SITE-001",
+        name: "Jaipur Old City Pilot",
+        description: "Haveli-style residential plot in the walled city of Jaipur, representative of hot-dry desert architecture.",
+        latitude: 26.9239,
+        longitude: 75.8267,
+        climate_zone: "Hot-Dry",
+        typology: "Residential",
+        vernacular_tradition: "Haveli architecture of Rajasthan",
+        plot_area_sqm: 320,
+        polygon: {
+            type: "Polygon",
+            coordinates: [[[75.8262, 26.9236], [75.8272, 26.9236], [75.8272, 26.9242], [75.8262, 26.9242], [75.8262, 26.9236]]]
+        },
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    },
+    {
+        id: "SITE-002",
+        name: "Kutch Bhunga Village",
+        description: "Circular bhunga dwelling site in the Rann of Kutch, representing indigenous earthquake-resistant and heat-adaptive architecture.",
+        latitude: 23.7337,
+        longitude: 69.8597,
+        climate_zone: "Hot-Dry",
+        typology: "Residential",
+        vernacular_tradition: "Bhunga dwellings of Kutch",
+        plot_area_sqm: 500,
+        polygon: {
+            type: "Polygon",
+            coordinates: [[[69.8590, 23.7332], [69.8604, 23.7332], [69.8604, 23.7342], [69.8590, 23.7342], [69.8590, 23.7332]]]
+        },
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    },
+    {
+        id: "SITE-003",
+        name: "Coorg Ainmane Homestead",
+        description: "Traditional Kodava ainmane (ancestral home) in the Western Ghats, representing warm-humid hill architecture.",
+        latitude: 12.4244,
+        longitude: 75.7382,
+        climate_zone: "Warm-Humid",
+        typology: "Residential",
+        vernacular_tradition: "Ainmane architecture of Kodagu",
+        plot_area_sqm: 800,
+        polygon: {
+            type: "Polygon",
+            coordinates: [[[75.7375, 12.4240], [75.7389, 12.4240], [75.7389, 12.4248], [75.7375, 12.4248], [75.7375, 12.4240]]]
+        },
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    }
+];
+
+const fallbackRulesData: Rule[] = [
+    {
+        rule_id: "RULE-001",
+        name: "Thick Thermal Mass Walls",
+        description: "Use of thick stone or mud brick walls to delay heat transfer.",
+        region: "Rajasthan",
+        climate_zone: "Hot-Dry",
+        tradition: "Haveli",
+        category: "Envelope",
+        recommendation: { summary: "Provide 300-450mm thick external walls", parameters: { "thickness": [300, 450], "material": "Stone/Mud" } },
+        confidence: 0.95,
+        sources: [{ type: "Book", reference: "Vernacular Architecture of Rajasthan" }],
+        tags: ["thermal-mass", "walls"]
+    },
+    {
+        rule_id: "RULE-002",
+        name: "Central Courtyard",
+        description: "Deep central courtyard for night sky radiation and shading.",
+        region: "Rajasthan",
+        climate_zone: "Hot-Dry",
+        tradition: "Haveli",
+        category: "Form",
+        recommendation: { summary: "Incorporate a central courtyard with H/W ratio > 1.5", parameters: { "height_width_ratio": ">1.5" } },
+        confidence: 0.88,
+        sources: [{ type: "Paper", reference: "Courtyard performance in hot-dry climates" }],
+        tags: ["courtyard", "passive-cooling"]
+    }
+];
+
+const fallbackMaterialsData: Material[] = [
+    {
+        material_id: "MAT-001",
+        name: "Laterite Stone",
+        category: "structural",
+        description: "Locally quarried reddish clayey rock.",
+        region: "Western Ghats",
+        properties: { thermal_conductivity: 0.85, density: 2000, specific_heat: 900 },
+        sustainability: { embodied_carbon: 12.5, local_availability: "High", recyclability: "High" },
+        tags: ["stone", "walls"]
+    },
+    {
+        material_id: "MAT-002",
+        name: "Sun-Dried Mud Brick (Adobe)",
+        category: "structural",
+        description: "Unbaked mud brick used in arid regions.",
+        region: "Rajasthan",
+        properties: { thermal_conductivity: 0.60, density: 1700, specific_heat: 1000 },
+        sustainability: { embodied_carbon: -2.0, local_availability: "High", recyclability: "High" },
+        tags: ["mud", "walls"]
+    }
+];
+
 export default function SiteReportPage() {
     const params = useParams();
     const router = useRouter();
@@ -38,7 +144,15 @@ export default function SiteReportPage() {
                 setRules(rulesData.rules);
                 setMaterials(materialsData.materials);
             } catch (err) {
-                console.error(err);
+                // Fallback for pilot sites if the backend is down
+                const fallbackSite = fallbackSitesData.find(s => s.id === siteId);
+                if (fallbackSite) {
+                    setSite(fallbackSite);
+                    setRules(fallbackRulesData.filter(r => r.climate_zone === fallbackSite.climate_zone || r.climate_zone === "All"));
+                    setMaterials(fallbackMaterialsData);
+                } else {
+                    console.error(err);
+                }
             } finally {
                 setLoading(false);
             }
@@ -60,10 +174,10 @@ export default function SiteReportPage() {
         <div className="max-w-4xl mx-auto pb-20 animate-fade-in relative">
 
             {/* Floating Action Bar (Hidden in Print) */}
-            <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/5 py-4 mb-8 -mx-8 px-8 flex items-center justify-between print:hidden">
+            <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 mb-8 -mx-8 px-8 flex items-center justify-between print:hidden">
                 <button
                     onClick={() => router.push(`/sites/${site.id}`)}
-                    className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+                    className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-800 transition-colors"
                 >
                     <ArrowLeft className="w-4 h-4" /> Back to Dashboard
                 </button>

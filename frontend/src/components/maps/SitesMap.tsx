@@ -122,7 +122,7 @@ export default function SitesMap() {
       attributionControl: false,
     });
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
       maxZoom: 19,
       subdomains: "abcd",
     }).addTo(map);
@@ -155,7 +155,7 @@ export default function SitesMap() {
 
       marker.bindPopup(`
         <div style="font-family: Inter, sans-serif; min-width: 200px;">
-          <h3 style="margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #e8ecf4;">
+          <h3 style="margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #0f172a;">
             ${site.name}
           </h3>
           <div style="display: flex; gap: 6px; margin-bottom: 8px;">
@@ -165,8 +165,8 @@ export default function SitesMap() {
               border-radius: 9999px; border: 1px solid ${colors.marker}44;
             ">${site.climate_zone}</span>
           </div>
-          ${site.tradition ? `<p style="margin: 0 0 8px; font-size: 12px; color: rgba(232,236,244,0.5);">${site.tradition}</p>` : ""}
-          <p style="margin: 0 0 12px; font-size: 11px; color: rgba(232,236,244,0.3);">
+          ${site.tradition ? `<p style="margin: 0 0 8px; font-size: 12px; color: #64748b;">${site.tradition}</p>` : ""}
+          <p style="margin: 0 0 12px; font-size: 11px; color: #94a3b8;">
             ${site.plot_area_sqm ? `${site.plot_area_sqm} m² · ` : ""}${site.latitude.toFixed(4)}°N, ${site.longitude.toFixed(4)}°E
           </p>
           <a href="/sites/${site.id}" style="
@@ -197,28 +197,28 @@ export default function SitesMap() {
       const div = L.DomUtil.create("div");
       div.innerHTML = `
         <div style="
-          background: rgba(26,27,35,0.9); backdrop-filter: blur(12px);
-          border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+          background: rgba(255,255,255,0.9); backdrop-filter: blur(12px);
+          border: 1px solid rgba(0,0,0,0.08); border-radius: 12px;
           padding: 12px 16px; font-family: Inter, sans-serif;
         ">
-          <p style="font-size: 10px; font-weight: 600; color: rgba(232,236,244,0.5); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px;">
+          <p style="font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px;">
             Climate Zones
           </p>
           <div style="display: flex; flex-direction: column; gap: 6px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <div style="width: 10px; height: 10px; border-radius: 50%; background: #e0654e;"></div>
-              <span style="font-size: 12px; color: rgba(232,236,244,0.7);">Hot-Dry</span>
+              <span style="font-size: 12px; color: #334155;">Hot-Dry</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <div style="width: 10px; height: 10px; border-radius: 50%; background: #36aaf5;"></div>
-              <span style="font-size: 12px; color: rgba(232,236,244,0.7);">Warm-Humid</span>
+              <span style="font-size: 12px; color: #334155;">Warm-Humid</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <div style="width: 10px; height: 10px; border-radius: 50%; background: #0c8ee6;"></div>
-              <span style="font-size: 12px; color: rgba(232,236,244,0.7);">Other</span>
+              <span style="font-size: 12px; color: #334155;">Other</span>
             </div>
           </div>
-          <p style="font-size: 10px; color: rgba(232,236,244,0.3); margin: 8px 0 0; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+          <p style="font-size: 10px; color: #94a3b8; margin: 8px 0 0; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 8px;">
             ${sites.length} site${sites.length !== 1 ? "s" : ""} loaded
           </p>
         </div>
